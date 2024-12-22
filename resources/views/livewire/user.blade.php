@@ -60,7 +60,59 @@
                     <div class="card border-primary">
                         <div class="card-header">Add User</div>
                         <div class="card-body">
-                            {{--  --}}
+                            {{-- Form --}}
+                            <form wire:submit="addUser">
+                                {{-- Name & Email --}}
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" id="name" class="form-control my-2"
+                                            placeholder="Your Name" wire:model="name" required>
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" class="form-control my-2"
+                                            placeholder="Your Email" wire:model="email" required>
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- Password & Role --}}
+                                <div class="form-group row my-2">
+                                    <div class="col-md-6">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control my-2"
+                                            placeholder="Your Password" wire:model="password" required>
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="role">Role</label>
+                                        <select name="role" id="role" class="form-control my-2"
+                                            wire:model="role" required>
+                                            <option value="" selected>-- Role --</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="cashier">Cashier</option>
+                                        </select>
+                                        @error('role')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                {{-- Button Submit --}}
+                                <div class="form-group row my-3">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-success">Add</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 @elseif($menu_list == 'edit')
