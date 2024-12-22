@@ -8,6 +8,7 @@ use Livewire\Component;
 class User extends Component
 {
     public $menu_list = "see";
+    public $user_choosed;
     public $name;
     public $email;
     public $password;
@@ -52,6 +53,30 @@ class User extends Component
 
         // Change menu_list Value
         $this->menu_list = "see";
+    }
+
+    public function deleteUser($id)
+    {
+        // Find User
+        $this->user_choosed = ModelsUser::findOrFail($id);
+
+        // Change menu_list Value
+        $this->menu_list = "delete";
+    }
+
+    public function cancel()
+    {
+        // Reset Field
+        $this->reset();
+    }
+
+    public function delete()
+    {
+        // Delete User
+        $this->user_choosed->delete();
+
+        // Reset Field
+        $this->reset();
     }
 
     public function render()

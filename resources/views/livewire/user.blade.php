@@ -44,10 +44,10 @@
                                             <td>
                                                 <button
                                                     class="btn {{ $menu_list == 'edit' ? 'btn-warning' : 'btn-warning' }}"
-                                                    wire:click="chooseMenu('edit')">Edit</button>
+                                                    wire:click="editUser('edit')">Edit</button>
                                                 <button
                                                     class="btn {{ $menu_list == 'delete' ? 'btn-danger' : 'btn-danger' }}"
-                                                    wire:click="chooseMenu('delete')">Delete</button>
+                                                    wire:click="deleteUser({{ $user->id }})">Delete</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -117,18 +117,22 @@
                     </div>
                 @elseif($menu_list == 'edit')
                     {{-- Edit User --}}
-                    <div class="card border-primary">
-                        <div class="card-header">Edit User</div>
+                    <div class="card border-warning">
+                        <div class="card-header bg-warning">Edit User</div>
                         <div class="card-body">
                             {{--  --}}
                         </div>
                     </div>
                 @elseif($menu_list == 'delete')
                     {{-- Delete User --}}
-                    <div class="card border-primary">
-                        <div class="card-header">Delete User</div>
+                    <div class="card border-danger">
+                        <div class="card-header bg-danger text-white">Delete User</div>
                         <div class="card-body">
-                            {{--  --}}
+                            {{-- Confirmation --}}
+                            Are you sure to delete the user?
+                            <p>Name: {{ $user_choosed->name }}</p>
+                            <button class="btn btn-danger" wire:click="delete">Delete</button>
+                            <button class="btn btn-secondary" wire:click="cancel">Cancel</button>
                         </div>
                     </div>
                 @endif
