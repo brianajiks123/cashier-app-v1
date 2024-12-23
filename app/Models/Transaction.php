@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Transaction extends Model
 {
     protected $fillable = [
-        'product_code',
-        'name',
-        'price',
-        'stock',
+        'transaction_code',
+        'total',
+        'status',
     ];
 
     // Relations

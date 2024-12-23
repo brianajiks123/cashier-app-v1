@@ -86,11 +86,11 @@
                         <a href="{{ route('home') }}" wire:navigate
                             class="btn {{ request()->routeIs('home') ? 'btn-primary' : 'btn-outline-primary' }}">Home</a>
                         <a href="{{ route('user') }}" wire:navigate
-                            class="btn {{ request()->routeIs('user') ? 'btn-primary' : 'btn-outline-primary' }}">User</a>
+                            class="btn {{ request()->routeIs('user') ? 'btn-primary' : 'btn-outline-primary' }} mx-2">User</a>
                         <a href="{{ route('product') }}" wire:navigate
                             class="btn {{ request()->routeIs('product') ? 'btn-primary' : 'btn-outline-primary' }}">Product</a>
                         <a href="{{ route('transaction') }}" wire:navigate
-                            class="btn {{ request()->routeIs('transaction') ? 'btn-primary' : 'btn-outline-primary' }}">Transaction</a>
+                            class="btn {{ request()->routeIs('transaction') ? 'btn-primary' : 'btn-outline-primary' }} mx-2">Transaction</a>
                         <a href="{{ route('report') }}" wire:navigate
                             class="btn {{ request()->routeIs('report') ? 'btn-primary' : 'btn-outline-primary' }}">Report</a>
                     </div>
