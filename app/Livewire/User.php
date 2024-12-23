@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\User as ModelsUser;
+use App\Models\User as ModelUser;
 use Livewire\Component;
 
 class User extends Component
@@ -41,7 +41,7 @@ class User extends Component
         ]);
 
         // Create User
-        $user = new ModelsUser;
+        $user = new ModelUser;
         $user->name = $data["name"];
         $user->email = $data["email"];
         $user->password = $data["password"];
@@ -58,7 +58,7 @@ class User extends Component
     public function chooseEdit($id)
     {
         // Find User
-        $this->user_choosed = ModelsUser::findOrFail($id);
+        $this->user_choosed = ModelUser::findOrFail($id);
 
         // Change User Record
         $this->name = $this->user_choosed->name;
@@ -73,7 +73,7 @@ class User extends Component
     public function chooseDelete($id)
     {
         // Find User
-        $this->user_choosed = ModelsUser::findOrFail($id);
+        $this->user_choosed = ModelUser::findOrFail($id);
 
         // Change menu_list Value
         $this->menu_list = "delete";
@@ -133,7 +133,7 @@ class User extends Component
     public function render()
     {
         return view('livewire.user')->with([
-            "all_user" => ModelsUser::all()
+            "all_user" => ModelUser::all()
         ]);
     }
 }

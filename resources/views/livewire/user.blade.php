@@ -148,7 +148,7 @@
                                     <div class="col-md-6">
                                         <label for="password">Password</label>
                                         <input type="password" name="password" id="password" class="form-control my-2"
-                                            placeholder="Your Password" wire:model="password" required>
+                                            placeholder="Your Password" wire:model="password">
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -170,7 +170,6 @@
                                 <div class="form-group row my-3">
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary">Update</button>
-                                        <button class="btn btn-secondary" wire:click="cancel">Cancel</button>
                                     </div>
                                 </div>
                             </form>
