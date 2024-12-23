@@ -32,6 +32,14 @@ class Transaction extends Component
             $detail_transaction = DetailTransaction::where("transaction_id", $this->transaction_active->id)->get();
 
             foreach ($detail_transaction as $detail) {
+                $product = Product::findOrFail($detail->product_id);
+
+                if ($product) {
+                    // Product Stock Returned
+                    $product->stock += $detail->amount;
+                    $product->save();
+                }
+                
                 $detail->delete();
             }
 
@@ -56,6 +64,12 @@ class Transaction extends Component
 
             $detail->amount += 1;
             $detail->save();
+
+            // Update Product Stock
+            $product->stock -= 1;
+            $product->save();
+
+            // Reset Transaction Code
             $this->reset("code");
         }
     }
@@ -82,6 +96,17 @@ class Transaction extends Component
     public function deleteProduct($id)
     {
         $detail = DetailTransaction::findOrFail($id);
+
+        if ($detail) {
+            $product = Product::findOrFail($detail->product_id);
+
+            if ($product) {
+                // Product Stock Returned
+                $product->stock += $detail->amount;
+                $product->save();
+            }
+        }
+
         $detail->delete();
     }
 
