@@ -23,7 +23,7 @@
                                     <th>No.</th>
                                     <th>Name</th>
                                     <th>Code / Barcode</th>
-                                    <th>Price</th>
+                                    <th>Price (Rp)</th>
                                     <th>Stock</th>
                                     <th>Action</th>
                                 </thead>
@@ -80,7 +80,7 @@
                                 {{-- Price & Stock --}}
                                 <div class="form-group row my-2">
                                     <div class="col-md-6">
-                                        <label for="price">Price</label>
+                                        <label for="price">Price (Rp)</label>
                                         <input type="number" name="price" id="price" class="form-control my-2"
                                             wire:model="price" required>
                                         @error('price')
@@ -135,7 +135,7 @@
                                 {{-- Price & Stock --}}
                                 <div class="form-group row my-2">
                                     <div class="col-md-6">
-                                        <label for="price">Price</label>
+                                        <label for="price">Price (Rp)</label>
                                         <input type="number" name="price" id="price" class="form-control my-2"
                                             wire:model="price" required>
                                         @error('price')
