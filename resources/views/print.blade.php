@@ -1,11 +1,26 @@
-<div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Print Transaction Report</title>
+
+    <!-- Bootstrap 5 compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body onload="print()">
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="card border-primary my-3">
                     <div class="card-body">
                         <h4 class="card-title">Transaction Report</h4>
-                        <a href="{{ route('print.transaction.report') }}" target="_blank" class="btn btn-success">Print</a>
 
                         <table class="table table-bordered text-center my-3">
                             <thead>
@@ -33,4 +48,6 @@
             </div>
         </div>
     </div>
-</div>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Transaction;
 
 class HomeController extends Controller
 {
@@ -24,5 +24,14 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function printTransactionReport()
+    {
+        $all_transaction = Transaction::where("status", "completed")->get();
+
+        return view('print')->with([
+            "all_transaction" => $all_transaction
+        ]);;
     }
 }

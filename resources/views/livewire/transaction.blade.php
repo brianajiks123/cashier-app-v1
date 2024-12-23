@@ -23,7 +23,7 @@
                             <table class="table table-bordered my-2">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th>#</th>
                                         <th>Product Code</th>
                                         <th>Product Name</th>
                                         <th>Price</th>

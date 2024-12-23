@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <table class="table table-bordered text-center">
                                 <thead>
-                                    <th>No.</th>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Verified</th>

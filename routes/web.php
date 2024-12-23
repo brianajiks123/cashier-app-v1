@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Home;
@@ -20,4 +21,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/product', Product::class)->name('product');
     Route::get('/transaction', Transaction::class)->name('transaction');
     Route::get('/report', Report::class)->name('report');
+    
+    // Print Transaction Report
+    Route::get('/print', [HomeController::class, "printTransactionReport"])->name('print.transaction.report');
 });
