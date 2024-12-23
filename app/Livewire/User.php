@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User as ModelUser;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class User extends Component
@@ -13,6 +14,14 @@ class User extends Component
     public $email;
     public $password;
     public $role;
+
+    // Function: Admin Only
+    public function mount()
+    {
+        if (Auth::check() && Auth::user()->role !== 'admin') {
+            abort(403);
+        }
+    }
 
     public function chooseMenu($menu)
     {

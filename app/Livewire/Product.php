@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Imports\Product as ProductImport;
 use App\Models\Product as ModelProduct;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
@@ -22,6 +23,14 @@ class Product extends Component
     public $name;
     public $price;
     public $stock;
+
+    // Function: Admin Only
+    public function mount()
+    {
+        if (Auth::check() && Auth::user()->role !== 'admin') {
+            abort(403);
+        }
+    }
 
     public function chooseMenu($menu)
     {
