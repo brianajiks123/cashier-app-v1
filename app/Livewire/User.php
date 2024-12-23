@@ -55,7 +55,22 @@ class User extends Component
         $this->menu_list = "see";
     }
 
-    public function deleteUser($id)
+    public function chooseEdit($id)
+    {
+        // Find User
+        $this->user_choosed = ModelsUser::findOrFail($id);
+
+        // Change User Record
+        $this->name = $this->user_choosed->name;
+        $this->email = $this->user_choosed->email;
+        $this->role = $this->user_choosed->role;
+        $this->role = $this->user_choosed->role;
+
+        // Change menu_list Value
+        $this->menu_list = "edit";
+    }
+
+    public function chooseDelete($id)
     {
         // Find User
         $this->user_choosed = ModelsUser::findOrFail($id);
@@ -70,7 +85,43 @@ class User extends Component
         $this->reset();
     }
 
-    public function delete()
+    public function updateUser()
+    {
+        // Data Validation
+        $data = $this->validate([
+            "name" => "required|string",
+            "email" => "required|email|unique:users,email," . $this->user_choosed->id,
+            "role" => "required|in:admin,cashier",
+        ], [
+            "name.required" => "Name is required.",
+            "name.string" => "Name must be a string.",
+            "email.required" => "Email is required.",
+            "email.email" => "Email must be a valid email address.",
+            "email.unique" => "This email is already taken.",
+            "role.required" => "Role is required.",
+            "role.in" => "Role must be either 'admin' or 'cashier'."
+        ]);
+
+        // Update User
+        $user = $this->user_choosed;
+        $user->name = $data["name"];
+        $user->email = $data["email"];
+
+        if ($this->password) {
+            $user->password = $this->password;
+        }
+
+        $user->role = $data["role"];
+        $user->save();
+
+        // Reset Field
+        $this->reset(["name", "email", "password", "role", "user_choosed"]);
+
+        // Change menu_list Value
+        $this->menu_list = "see";
+    }
+
+    public function deleteUser()
     {
         // Delete User
         $this->user_choosed->delete();

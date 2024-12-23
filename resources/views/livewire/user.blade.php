@@ -16,7 +16,7 @@
                 @if ($menu_list == 'see')
                     {{-- See User --}}
                     <div class="card border-primary">
-                        <div class="card-header">All User</div>
+                        <div class="card-header bg-primary text-white">All User</div>
                         <div class="card-body">
                             <table class="table table-bordered text-center">
                                 <thead>
@@ -44,10 +44,10 @@
                                             <td>
                                                 <button
                                                     class="btn {{ $menu_list == 'edit' ? 'btn-warning' : 'btn-warning' }}"
-                                                    wire:click="editUser('edit')">Edit</button>
+                                                    wire:click="chooseEdit({{ $user->id }})">Edit</button>
                                                 <button
                                                     class="btn {{ $menu_list == 'delete' ? 'btn-danger' : 'btn-danger' }}"
-                                                    wire:click="deleteUser({{ $user->id }})">Delete</button>
+                                                    wire:click="chooseDelete({{ $user->id }})">Delete</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -58,7 +58,7 @@
                 @elseif($menu_list == 'add')
                     {{-- Add User --}}
                     <div class="card border-primary">
-                        <div class="card-header">Add User</div>
+                        <div class="card-header bg-success text-white">Add User</div>
                         <div class="card-body">
                             {{-- Form --}}
                             <form wire:submit="addUser">
@@ -120,7 +120,60 @@
                     <div class="card border-warning">
                         <div class="card-header bg-warning">Edit User</div>
                         <div class="card-body">
-                            {{--  --}}
+                            {{-- Form --}}
+                            <form wire:submit="updateUser">
+                                {{-- Name & Email --}}
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" id="name" class="form-control my-2"
+                                            placeholder="Your Name" wire:model="name" required>
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" class="form-control my-2"
+                                            placeholder="Your Email" wire:model="email" required>
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- Password & Role --}}
+                                <div class="form-group row my-2">
+                                    <div class="col-md-6">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control my-2"
+                                            placeholder="Your Password" wire:model="password" required>
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="role">Role</label>
+                                        <select name="role" id="role" class="form-control my-2"
+                                            wire:model="role" required>
+                                            <option value="" selected>-- Role --</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="cashier">Cashier</option>
+                                        </select>
+                                        @error('role')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                {{-- Button Submit --}}
+                                <div class="form-group row my-3">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button class="btn btn-secondary" wire:click="cancel">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 @elseif($menu_list == 'delete')
@@ -131,7 +184,7 @@
                             {{-- Confirmation --}}
                             Are you sure to delete the user?
                             <p>Name: {{ $user_choosed->name }}</p>
-                            <button class="btn btn-danger" wire:click="delete">Delete</button>
+                            <button class="btn btn-danger" wire:click="deleteUser">Delete</button>
                             <button class="btn btn-secondary" wire:click="cancel">Cancel</button>
                         </div>
                     </div>
