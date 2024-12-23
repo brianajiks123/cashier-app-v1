@@ -2,11 +2,20 @@
 
 namespace App\Livewire;
 
+use App\Imports\Product as ProductImport;
 use App\Models\Product as ModelProduct;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Product extends Component
 {
+    use WithFileUploads;
+
+    #[Validate('max:1024')]
+    public $excelProduct;
+
     public $menu_list = "see";
     public $product_choosed;
     public $product_code;
@@ -121,6 +130,15 @@ class Product extends Component
     {
         // Delete User
         $this->product_choosed->delete();
+
+        // Reset Field
+        $this->reset();
+    }
+
+    public function importProduct()
+    {
+        // Read Excel File
+        Excel::import(new ProductImport, $this->excelProduct);
 
         // Reset Field
         $this->reset();

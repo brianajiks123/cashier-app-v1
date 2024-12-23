@@ -6,6 +6,8 @@
                     wire:click="chooseMenu('see')">All Product</button>
                 <button class="btn {{ $menu_list == 'add' ? 'btn-primary' : 'btn-outline-primary' }}"
                     wire:click="chooseMenu('add')">Add Product</button>
+                <button class="btn {{ $menu_list == 'importExcel' ? 'btn-primary' : 'btn-outline-primary' }}"
+                    wire:click="chooseMenu('importExcel')">Import Product</button>
                 <button class="btn btn-info" wire:loading>Loading ...</button>
             </div>
         </div>
@@ -171,6 +173,25 @@
                             <p>Product Name: {{ $product_choosed->name }}</p>
                             <button class="btn btn-danger" wire:click="deleteProduct">Delete</button>
                             <button class="btn btn-secondary" wire:click="cancel">Cancel</button>
+                        </div>
+                    </div>
+                @elseif($menu_list == 'importExcel')
+                    {{-- Import Product --}}
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">Import Product</div>
+                        <div class="card-body">
+                            {{-- Form --}}
+                            <form wire:submit="importProduct">
+                                <div class="form-group my-3">
+                                    <input type="file" accept=".xls,.xlsx" class="form-control"
+                                        wire:model="excelProduct">
+
+                                    @error('stock')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <button type="submit" class="btn btn-primary">Load</button>
+                            </form>
                         </div>
                     </div>
                 @endif
